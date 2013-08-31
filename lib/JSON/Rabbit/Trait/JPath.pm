@@ -243,7 +243,6 @@ sub _create_instance {
 
 sub _find_node {
     my ($self, $parent, $jpath_query) = @_;
-    $DB::single = 1;
     
     $self->_verify_parent_role( $parent );
     my( $node ) = $parent->find( $jpath_query, $parent->node );

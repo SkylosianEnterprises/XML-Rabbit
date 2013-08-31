@@ -13,7 +13,12 @@ has_jpath_value 'issue_number' => '$..issue_number';
  
 has_jpath_object 'volume' => '$..volume' => 'ComicsVine::Issue::Volume';
  
-has_jpath_object_list 'persons' => '$..person_credits', 'ComicsVine::Issue::Person';
+has_jpath_object_list 'persons' => '$..person_credits[*]',
+'ComicsVine::Issue::Person', 
+handles => {
+    all_persons => 'elements',
+}
+;
  
 finalize_class();
  
@@ -41,7 +46,7 @@ $DB::single = 1;
 
 say "issue number ", $issue->issue_number;
 say "volume: ", $issue->volume->name;
-say "credits ", join ' ', map { $_->name } $issue->persons;
+say "credits ", join ' ', map { $_->name } $issue->all_persons;
  
 exit;
 
