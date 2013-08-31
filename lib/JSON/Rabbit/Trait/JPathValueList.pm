@@ -1,10 +1,10 @@
 use strict;
 use warnings;
 
-package XML::Rabbit::Trait::XPathValueList;
+package JSON::Rabbit::Trait::JPathValueList;
 use Moose::Role;
 
-with 'XML::Rabbit::Trait::XPath';
+with 'JSON::Rabbit::Trait::JPath';
 
 # ABSTRACT: Multiple value xpath extractor trait
 
@@ -38,7 +38,7 @@ sub _build_default {
     };
 }
 
-Moose::Util::meta_attribute_alias('XPathValueList');
+Moose::Util::meta_attribute_alias('JPathValueList');
 
 no Moose::Role;
 
@@ -46,13 +46,13 @@ no Moose::Role;
 
 =head1 SYNOPSIS
 
-    package MyXMLSyntaxNode;
+    package MyJSONSyntaxNode;
     use Moose;
-    with 'XML::Rabbit::RootNode';
+    with 'JSON::Rabbit::RootNode';
 
     has all_references => (
         isa         => 'ArrayRef[Str]',
-        traits      => [qw(XPathValueList)],
+        traits      => [qw(JPathValueList)],
         xpath_query => '//@href|//@src',
     );
 
@@ -63,6 +63,6 @@ no Moose::Role;
 
 =head1 DESCRIPTION
 
-This module provides the extraction of primitive values from an XML node based on an XPath query.
+This module provides the extraction of primitive values from an JSON node based on an JPath query.
 
-See L<XML::Rabbit> for a more complete example.
+See L<JSON::Rabbit> for a more complete example.

@@ -1,17 +1,19 @@
 use strict;
 use warnings;
 
-package XML::Rabbit::Role::Document;
+package JSON::Rabbit::Role::Document;
 use Moose::Role;
 
-use XML::LibXML 1.69 ();
+use JSON;
+use Path::Tiny;
+
 use Encode ();
 
-# ABSTRACT: XML Document base class
+# ABSTRACT: JSON Document base class
 
 =attr _file
 
-A string representing the path to the file that contains the XML document data. Read Only. Constructor parameter is C<file>.
+A string representing the path to the file that contains the JSON document data. Read Only. Constructor parameter is C<file>.
 
 =cut
 
@@ -24,7 +26,7 @@ has '_file' => (
 
 =attr _fh
 
-A glob reference / file handle that points to the XML document data. Read Only. Constructor parameter is C<fh>.
+A glob reference / file handle that points to the JSON document data. Read Only. Constructor parameter is C<fh>.
 
 =cut
 
@@ -37,7 +39,7 @@ has '_fh' => (
 
 =attr _xml
 
-A binary string containing the XML document data. Read Only. Constructor parameter is C<xml>.
+A binary string containing the JSON document data. Read Only. Constructor parameter is C<xml>.
 
 =cut
 
@@ -50,13 +52,12 @@ has '_xml' => (
 
 =attr _document
 
-An instance of an L<XML::LibXML::Document> class. Read Only. Constructor parameter is C<dom>.
+An instance of an L<JSON::LibJSON::Document> class. Read Only. Constructor parameter is C<dom>.
 
 =cut
 
 has '_document' => (
     is         => 'ro',
-    isa        => 'XML::LibXML::Document',
     lazy_build => 1,
     init_arg   => 'dom',
 );
@@ -65,23 +66,28 @@ sub _build__document {
     my ( $self ) = @_;
     my $doc;
     # Priority source order is: file, fh, xml (string) if multiple defined
+    if( $self->_has_file ) {
+        $doc = $self->_parser->decode( path($self->_file)->slurp );
+    }
+    else{
     $doc = $self->_parser->parse_file(   $self->_file ) if $self->_has_file;
     $doc = $self->_parser->parse_fh(     $self->_fh   ) if $self->_has_fh and not defined($doc);
     $doc = $self->_parser->parse_string( $self->_xml  ) if $self->_has_xml and not defined($doc);
     confess("No input specified. Please specify argument file, fh, xml or dom.\n") unless $doc;
+}
     return $doc;
 }
 
 has '_parser' => (
     is      => 'ro',
-    isa     => 'XML::LibXML',
+    isa     => 'JSON',
     lazy    => 1,
-    default => sub { XML::LibXML->new(), },
+    default => sub { JSON->new(), },
 );
 
 =method dump_document_xml
 
-Dumps the XML of the entire document as a native perl string.
+Dumps the JSON of the entire document as a native perl string.
 
 =cut
 
@@ -99,9 +105,9 @@ no Moose::Role;
 
 =head1 SYNOPSIS
 
-    package MyXMLSyntax;
+    package MyJSONSyntax;
     use Moose;
-    with 'XML::Rabbit::Role::Document';
+    with 'JSON::Rabbit::Role::Document';
 
     sub root_node {
         return shift->_document->documentElement();
@@ -110,6 +116,6 @@ no Moose::Role;
 
 =head1 DESCRIPTION
 
-This module provides the base document attribute used to hold the parsed XML content.
+This module provides the base document attribute used to hold the parsed JSON content.
 
-See L<XML::Rabbit> for a more complete example.
+See L<JSON::Rabbit> for a more complete example.

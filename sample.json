@@ -1,0 +1,218 @@
+{
+   "status_code" : 1,
+   "version" : "1.0",
+   "error" : "OK",
+   "limit" : 1,
+   "results" : {
+      "has_staff_review" : false,
+      "location_credits" : [
+         {
+            "api_detail_url" : "http://www.comicvine.com/api/location/4020-41184/",
+            "name" : "Metropolis",
+            "id" : 41184,
+            "site_detail_url" : "http://www.comicvine.com/metropolis/4020-41184/"
+         },
+         {
+            "api_detail_url" : "http://www.comicvine.com/api/location/4020-55741/",
+            "name" : "Pennsylvania",
+            "id" : 55741,
+            "site_detail_url" : "http://www.comicvine.com/pennsylvania/4020-55741/"
+         }
+      ],
+      "cover_date" : "1985-07-01",
+      "person_credits" : [
+         {
+            "api_detail_url" : "http://www.comicvine.com/api/person/4040-2059/",
+            "name" : "Anthony Tollin",
+            "id" : 2059,
+            "role" : "colorist",
+            "site_detail_url" : "http://www.comicvine.com/anthony-tollin/4040-2059/"
+         },
+         {
+            "api_detail_url" : "http://www.comicvine.com/api/person/4040-16438/",
+            "name" : "Bob Oksner",
+            "id" : 16438,
+            "role" : "inker",
+            "site_detail_url" : "http://www.comicvine.com/bob-oksner/4040-16438/"
+         },
+         {
+            "api_detail_url" : "http://www.comicvine.com/api/person/4040-9421/",
+            "name" : "John Costanza",
+            "id" : 9421,
+            "role" : "letterer",
+            "site_detail_url" : "http://www.comicvine.com/john-costanza/4040-9421/"
+         },
+         {
+            "api_detail_url" : "http://www.comicvine.com/api/person/4040-31303/",
+            "name" : "Julius Schwartz",
+            "id" : 31303,
+            "role" : "editor",
+            "site_detail_url" : "http://www.comicvine.com/julius-schwartz/4040-31303/"
+         },
+         {
+            "api_detail_url" : "http://www.comicvine.com/api/person/4040-6536/",
+            "name" : "Keith Giffen",
+            "id" : 6536,
+            "role" : "writer, penciler, cover",
+            "site_detail_url" : "http://www.comicvine.com/keith-giffen/4040-6536/"
+         },
+         {
+            "api_detail_url" : "http://www.comicvine.com/api/person/4040-43155/",
+            "name" : "Robert Loren Fleming",
+            "id" : 43155,
+            "role" : "writer",
+            "site_detail_url" : "http://www.comicvine.com/robert-loren-fleming/4040-43155/"
+         }
+      ],
+      "first_appearance_teams" : null,
+      "site_detail_url" : "http://www.comicvine.com/ambush-bug-2-ambush-bug-versus-the-koala-who-walks/4000-25629/",
+      "api_detail_url" : "http://www.comicvine.com/api/issue/4000-25629/",
+      "story_arc_credits" : [],
+      "deck" : null,
+      "store_date" : null,
+      "first_appearance_concepts" : [
+         {
+            "api_detail_url" : "http://www.comicvine.com/api/concept/4015-44795/",
+            "name" : "Fourth Wall",
+            "id" : 44795,
+            "site_detail_url" : "http://www.comicvine.com/fourth-wall/4015-44795/"
+         }
+      ],
+      "date_last_updated" : "2012-03-28 16:55:04",
+      "id" : 25629,
+      "object_credits" : [],
+      "team_credits" : [],
+      "issue_number" : "2",
+      "first_appearance_characters" : [
+         {
+            "api_detail_url" : "http://www.comicvine.com/api/character/4005-28888/",
+            "name" : "Ambush Bug",
+            "id" : 28888,
+            "site_detail_url" : "http://www.comicvine.com/ambush-bug/4005-28888/"
+         },
+         {
+            "api_detail_url" : "http://www.comicvine.com/api/character/4005-31343/",
+            "name" : "Quantis",
+            "id" : 31343,
+            "site_detail_url" : "http://www.comicvine.com/quantis/4005-31343/"
+         },
+         {
+            "api_detail_url" : "http://www.comicvine.com/api/character/4005-2349/",
+            "name" : "Darkseid",
+            "id" : 2349,
+            "site_detail_url" : "http://www.comicvine.com/darkseid/4005-2349/"
+         },
+         {
+            "api_detail_url" : "http://www.comicvine.com/api/character/4005-30726/",
+            "name" : "Jonni DC",
+            "id" : 30726,
+            "site_detail_url" : "http://www.comicvine.com/jonni-dc/4005-30726/"
+         },
+         {
+            "api_detail_url" : "http://www.comicvine.com/api/character/4005-78785/",
+            "name" : "Ned Orton",
+            "id" : 78785,
+            "site_detail_url" : "http://www.comicvine.com/ned-orton/4005-78785/"
+         },
+         {
+            "api_detail_url" : "http://www.comicvine.com/api/character/4005-78786/",
+            "name" : "Dr. Bagel",
+            "id" : 78786,
+            "site_detail_url" : "http://www.comicvine.com/dr-bagel/4005-78786/"
+         }
+      ],
+      "volume" : {
+         "api_detail_url" : "http://www.comicvine.com/api/volume/4050-3435/",
+         "name" : "Ambush Bug",
+         "id" : 3435,
+         "site_detail_url" : "http://www.comicvine.com/ambush-bug/4050-3435/"
+      },
+      "first_appearance_objects" : null,
+      "concept_credits" : [
+         {
+            "api_detail_url" : "http://www.comicvine.com/api/concept/4015-44795/",
+            "name" : "Fourth Wall",
+            "id" : 44795,
+            "site_detail_url" : "http://www.comicvine.com/fourth-wall/4015-44795/"
+         }
+      ],
+      "name" : "Ambush Bug Versus the Koala Who Walks Like a Man!! (Awwww, Cute)",
+      "description" : "<p>A man walks into Ambush Bug's Detective agency. He has a problem. There is someone after him, and he wants to hire the bug to stop him. See the man trying to hire the Ambush bug is a scientist. A scientist who is trying to remove and harness the cuteness of a Koala bear. A homely Janitor notices that one of the scientist decides to inject himself with the Koala cuteness, causing the janitor to change into a Koala bear of Kong like porportions. Causing no one to run in terror, but to say \"Ahhhh\" when he terrorizes the city. We are also treated to the first appearance of Jonni DC, the continuity cop.</p><p>And of course at the end, we are told next issue he faces Darkseid.</p>",
+      "image" : {
+         "tiny_url" : "http://static.comicvine.com/uploads/square_mini/0/4/22975-3435-25629-1-ambush-bug.jpg",
+         "icon_url" : "http://static.comicvine.com/uploads/square_avatar/0/4/22975-3435-25629-1-ambush-bug.jpg",
+         "super_url" : "http://static.comicvine.com/uploads/scale_large/0/4/22975-3435-25629-1-ambush-bug.jpg",
+         "small_url" : "http://static.comicvine.com/uploads/scale_small/0/4/22975-3435-25629-1-ambush-bug.jpg",
+         "thumb_url" : "http://static.comicvine.com/uploads/scale_avatar/0/4/22975-3435-25629-1-ambush-bug.jpg",
+         "screen_url" : "http://static.comicvine.com/uploads/screen_medium/0/4/22975-3435-25629-1-ambush-bug.jpg",
+         "medium_url" : "http://static.comicvine.com/uploads/scale_medium/0/4/22975-3435-25629-1-ambush-bug.jpg"
+      },
+      "character_died_in" : [
+         {
+            "api_detail_url" : "http://www.comicvine.com/api/character/4005-78785/",
+            "name" : "Ned Orton",
+            "id" : 78785,
+            "site_detail_url" : "http://www.comicvine.com/ned-orton/4005-78785/"
+         }
+      ],
+      "date_added" : "2008-06-06 11:14:14",
+      "team_disbanded_in" : [],
+      "aliases" : null,
+      "first_appearance_locations" : [
+         {
+            "api_detail_url" : "http://www.comicvine.com/api/location/4020-41184/",
+            "name" : "Metropolis",
+            "id" : 41184,
+            "site_detail_url" : "http://www.comicvine.com/metropolis/4020-41184/"
+         },
+         {
+            "api_detail_url" : "http://www.comicvine.com/api/location/4020-55741/",
+            "name" : "Pennsylvania",
+            "id" : 55741,
+            "site_detail_url" : "http://www.comicvine.com/pennsylvania/4020-55741/"
+         }
+      ],
+      "first_appearance_storyarcs" : null,
+      "character_credits" : [
+         {
+            "api_detail_url" : "http://www.comicvine.com/api/character/4005-28888/",
+            "name" : "Ambush Bug",
+            "id" : 28888,
+            "site_detail_url" : "http://www.comicvine.com/ambush-bug/4005-28888/"
+         },
+         {
+            "api_detail_url" : "http://www.comicvine.com/api/character/4005-2349/",
+            "name" : "Darkseid",
+            "id" : 2349,
+            "site_detail_url" : "http://www.comicvine.com/darkseid/4005-2349/"
+         },
+         {
+            "api_detail_url" : "http://www.comicvine.com/api/character/4005-78786/",
+            "name" : "Dr. Bagel",
+            "id" : 78786,
+            "site_detail_url" : "http://www.comicvine.com/dr-bagel/4005-78786/"
+         },
+         {
+            "api_detail_url" : "http://www.comicvine.com/api/character/4005-30726/",
+            "name" : "Jonni DC",
+            "id" : 30726,
+            "site_detail_url" : "http://www.comicvine.com/jonni-dc/4005-30726/"
+         },
+         {
+            "api_detail_url" : "http://www.comicvine.com/api/character/4005-78785/",
+            "name" : "Ned Orton",
+            "id" : 78785,
+            "site_detail_url" : "http://www.comicvine.com/ned-orton/4005-78785/"
+         },
+         {
+            "api_detail_url" : "http://www.comicvine.com/api/character/4005-31343/",
+            "name" : "Quantis",
+            "id" : 31343,
+            "site_detail_url" : "http://www.comicvine.com/quantis/4005-31343/"
+         }
+      ]
+   },
+   "number_of_total_results" : 1,
+   "number_of_page_results" : 1,
+   "offset" : 0
+}

@@ -1,12 +1,12 @@
 use strict;
 use warnings;
 
-package XML::Rabbit::Trait::XPathObject;
+package JSON::Rabbit::Trait::JPathObject;
 use Moose::Role;
 
-with 'XML::Rabbit::Trait::XPath';
+with 'JSON::Rabbit::Trait::JPath';
 
-# ABSTRACT: XML DOM object xpath extractor trait
+# ABSTRACT: JSON DOM object xpath extractor trait
 
 around '_process_options' => sub {
     my ($orig, $self, $name, $options, @rest) = @_;
@@ -22,7 +22,7 @@ around '_process_options' => sub {
 =attr isa_map
 
 Specifies the prefix:tag to class name mapping used with union xpath
-queries. See L<XML::Rabbit> for more detailed information.
+queries. See L<JSON::Rabbit> for more detailed information.
 
 =cut
 
@@ -45,7 +45,7 @@ sub _build_default {
         my ($parent) = @_;
         my $node = $self->_find_node(
             $parent,
-            $self->_resolve_xpath_query( $parent ),
+            $self->_resolve_jpath_query( $parent ),
         );
         $self->_convert_isa_map( $parent );
         my $class = $self->_resolve_class();
@@ -53,7 +53,7 @@ sub _build_default {
     };
 }
 
-Moose::Util::meta_attribute_alias('XPathObject');
+Moose::Util::meta_attribute_alias('JPathObject');
 
 no Moose::Role;
 
@@ -61,13 +61,13 @@ no Moose::Role;
 
 =head1 SYNOPSIS
 
-    package MyXMLSyntaxNode;
+    package MyJSONSyntaxNode;
     use Moose;
-    with 'XML::Rabbit::Node';
+    with 'JSON::Rabbit::Node';
 
     has 'first_person' => (
-        isa         => 'MyXMLSyntax::Person',
-        traits      => [qw(XPathObject)],
+        isa         => 'MyJSONSyntax::Person',
+        traits      => [qw(JPathObject)],
         xpath_query => './person[1]',
     );
 
@@ -78,8 +78,8 @@ no Moose::Role;
 
 =head1 DESCRIPTION
 
-This module provides the extraction of complex values (subtrees) from an XML
-node based on an XPath query. The subtree is used as input for the
+This module provides the extraction of complex values (subtrees) from an JSON
+node based on an JPath query. The subtree is used as input for the
 constructor of the class specified in the isa attribute.
 
-See L<XML::Rabbit> for a more complete example.
+See L<JSON::Rabbit> for a more complete example.

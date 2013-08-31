@@ -1,17 +1,17 @@
 use strict;
 use warnings;
 
-package XML::Rabbit::Trait::XPath;
+package JSON::Rabbit::Trait::JPath;
 use Moose::Role;
 use Moose::Util::TypeConstraints;
 use Perl6::Junction ();
 
-# ABSTRACT: Base role for other xpath traits
+# ABSTRACT: Base role for other jpath traits
 
 around '_process_options' => sub {
     my ($orig, $self, $name, $options, @rest) = @_;
 
-    # XPath-derived attributes should always be
+    # JPath-derived attributes should always be
     # set using the builder, this is just a way to enforce
     # that behaviour.
     $options->{'is'} = 'ro';
@@ -44,12 +44,12 @@ around '_process_options' => sub {
             }
             # Build union isa
             my $isa = join('|', @classes);
-            # If traits indicate XPathObjectList, assume an ArrayRef
-            if ( Perl6::Junction::any( @{ $options->{'traits'} } ) == qr/^XML::Rabbit::Trait::XPathObjectList$/x ) {
+            # If traits indicate JPathObjectList, assume an ArrayRef
+            if ( Perl6::Junction::any( @{ $options->{'traits'} } ) == qr/^JSON::Rabbit::Trait::JPathObjectList$/x ) {
                 $isa = "ArrayRef[$isa]";
             }
-            # If traits indicate XPathObjectMap, assume a HashRef
-            if ( Perl6::Junction::any( @{ $options->{'traits'} } ) == qr/^XML::Rabbit::Trait::XPathObjectMap$/x ) {
+            # If traits indicate JPathObjectMap, assume a HashRef
+            if ( Perl6::Junction::any( @{ $options->{'traits'} } ) == qr/^JSON::Rabbit::Trait::JPathObjectMap$/x ) {
                 $isa = "HashRef[$isa]";
             }
             $options->{'isa'} = $isa;
@@ -67,7 +67,7 @@ generated attribute class. It should return a code reference that will be
 run in the content of the parent class (i.e. the class that defined the
 attribute).
 
-Below you can see an example from the XPathValue trait:
+Below you can see an example from the JPathValue trait:
 
     sub _build_default {
         my ($self) = @_;
@@ -75,7 +75,7 @@ Below you can see an example from the XPathValue trait:
             my ($parent) = @_;
             my $node = $self->_find_node(
                 $parent,
-                $self->_resolve_xpath_query( $parent ),
+                $self->_resolve_jpath_query( $parent ),
             );
             return blessed($node) ? $node->to_literal . "" : "";
         };
@@ -83,14 +83,14 @@ Below you can see an example from the XPathValue trait:
 
 =cut
 
-=attr xpath_query
+=attr jpath_query
 
-A string or a coderef that generates a string that is the XPath query used
+A string or a coderef that generates a string that is the JPath query used
 to find the wanted value. Read Only.
 
 =cut
 
-has 'xpath_query' => (
+has 'jpath_query' => (
     is       => 'ro',
     isa      => 'Str|CodeRef',
     required => 1,
@@ -106,31 +106,31 @@ sub _verify_parent_role {
     my ($self, $parent) = @_;
 
     # Make sure the parent class implements required role
-    unless ( $parent->does('XML::Rabbit::Role::Node') ) {
-        confess( ref($parent) . " doesn't implement XML::Rabbit::Role::Node");
+    unless ( $parent->does('JSON::Rabbit::Role::Node') ) {
+        confess( ref($parent) . " doesn't implement JSON::Rabbit::Role::Node");
     }
 
     return 1;
 }
 
-sub _resolve_xpath_query {
+sub _resolve_jpath_query {
     my ($self, $parent) = @_;
 
-    # Figure out if xpath_query is code
-    my $query_is_object = blessed($self->xpath_query) ? 1 : 0;
-    my $query_is_coderef = ref($self->xpath_query) eq 'CODE' ? 1 : 0;
+    # Figure out if jpath_query is code
+    my $query_is_object = blessed($self->jpath_query) ? 1 : 0;
+    my $query_is_coderef = ref($self->jpath_query) eq 'CODE' ? 1 : 0;
     my $query_is_code = $query_is_coderef;
-       $query_is_code ||= $query_is_object && $self->xpath_query->isa('Class::MOP::Method');
+       $query_is_code ||= $query_is_object && $self->jpath_query->isa('Class::MOP::Method');
 
-    # Run code reference if necessary to build xpath query.
+    # Run code reference if necessary to build jpath query.
     # The parent object is the first param to the coderef, not the attribute.
     # This allows the resolution of information in the coderef to happen
     # from the perspective of the class that uses the attribute instead from
     # the perspective of the attribute.
     # Finally overwrite coderef with static value.
-    my $xpath_query = $query_is_code ? $self->xpath_query->($parent) : $self->xpath_query;
+    my $jpath_query = $query_is_code ? $self->jpath_query->($parent) : $self->jpath_query;
 
-    return $xpath_query;
+    return $jpath_query;
 }
 
 sub _resolve_class {
@@ -235,7 +235,6 @@ sub _create_instance {
 
     Class::MOP::load_class($class); # FIXME: This should be fixed at line 153
     my $instance = $class->new(
-        xpc           => $parent->xpc,
         node          => $node,
         namespace_map => $parent->namespace_map,
     );
@@ -243,20 +242,20 @@ sub _create_instance {
 }
 
 sub _find_node {
-    my ($self, $parent, $xpath_query) = @_;
+    my ($self, $parent, $jpath_query) = @_;
+    $DB::single = 1;
+    
     $self->_verify_parent_role( $parent );
-    my $node = $parent->xpc->find( $xpath_query, $parent->node );
-    return unless blessed($node); # No node found, just return undef (optional elements)
-    $node = $node->shift if $node->isa('XML::LibXML::NodeList'); # Get first item if multiple results
+    my( $node ) = $parent->find( $jpath_query, $parent->node );
     return $node;
 }
 
 sub _find_nodes {
-    my ($self, $parent, $xpath_query) = @_;
+    my ($self, $parent, $jpath_query) = @_;
     $self->_verify_parent_role( $parent );
     my @nodes;
-    foreach my $node ( $parent->xpc->findnodes( $xpath_query, $parent->node ) ) {
-        push @nodes, $node if blessed($node);
+    foreach my $node ( $parent->findnodes( $jpath_query, $parent->node ) ) {
+        push @nodes, $node;
     }
     return wantarray ? @nodes : \@nodes;
 }
@@ -268,10 +267,10 @@ no Moose::Util::TypeConstraints;
 
 =head1 SYNOPSIS
 
-    package XML::Rabbit::Trait::XPathSomething;
+    package JSON::Rabbit::Trait::JPathSomething;
     use Moose::Role;
 
-    with 'XML::Rabbit::Trait::XPath';
+    with 'JSON::Rabbit::Trait::JPath';
 
     sub _build_default {
         my ($self) = @_;
@@ -283,7 +282,7 @@ no Moose::Util::TypeConstraints;
         };
     }
 
-    Moose::Util::meta_attribute_alias('XPathSomething');
+    Moose::Util::meta_attribute_alias('JPathSomething');
 
     no Moose::Role;
 
@@ -291,6 +290,6 @@ no Moose::Util::TypeConstraints;
 
 =head1 DESCRIPTION
 
-This module provides base methods for other xpath traits.
+This module provides base methods for other jpath traits.
 
-See L<XML::Rabbit> for a more complete example.
+See L<JSON::Rabbit> for a more complete example.

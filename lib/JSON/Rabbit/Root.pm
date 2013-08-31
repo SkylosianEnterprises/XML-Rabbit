@@ -1,24 +1,24 @@
 use strict;
 use warnings;
 
-package XML::Rabbit::Root;
+package JSON::Rabbit::Root;
 use 5.008;
 
 # ABSTRACT: Root class with sugar functions available
 
-use XML::Rabbit::Sugar (); # no magic, just load
+use JSON::Rabbit::Sugar (); # no magic, just load
 use namespace::autoclean (); # no cleanup, just load
 use Moose::Exporter;
 
 my ($import, $unimport, $init_meta) = Moose::Exporter->build_import_methods(
-    also             => 'XML::Rabbit::Sugar',
-    base_class_roles => ['XML::Rabbit::RootNode'],
+    also             => 'JSON::Rabbit::Sugar',
+    base_class_roles => ['JSON::Rabbit::RootNode'],
 );
 
 =func import
 
 Automatically loads L<namespace::autoclean> into the caller's package and
-dispatches to L<XML::Rabbit::Sugar/"import"> (tail call).
+dispatches to L<JSON::Rabbit::Sugar/"import"> (tail call).
 
 =cut
 
@@ -30,7 +30,7 @@ sub import {
 
 =func unimport
 
-Dispatches to L<XML::Rabbit::Sugar/"unimport"> (tail call).
+Dispatches to L<JSON::Rabbit::Sugar/"unimport"> (tail call).
 
 =cut
 
@@ -42,7 +42,7 @@ sub unimport {
 =func init_meta
 
 Initializes the metaclass of the calling class and adds the role
-L<XML::Rabbit::RootNode>.
+L<JSON::Rabbit::RootNode>.
 
 =cut
 
@@ -58,7 +58,7 @@ sub init_meta {
     Moose->init_meta(%opts);
     Moose::Util::MetaRole::apply_base_class_roles(
         for   => $opts{for_class},
-        roles => ['XML::Rabbit::RootNode']
+        roles => ['JSON::Rabbit::RootNode']
     );
     return Class::MOP::class_of($opts{for_class});
 }

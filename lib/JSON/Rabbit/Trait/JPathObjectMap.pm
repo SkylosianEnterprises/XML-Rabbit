@@ -1,12 +1,12 @@
 use strict;
 use warnings;
 
-package XML::Rabbit::Trait::XPathObjectMap;
+package JSON::Rabbit::Trait::JPathObjectMap;
 use Moose::Role;
 
-with 'XML::Rabbit::Trait::XPath';
+with 'JSON::Rabbit::Trait::JPath';
 
-# ABSTRACT: Multiple XML DOM object xpath extractor trait
+# ABSTRACT: Multiple JSON DOM object xpath extractor trait
 
 around '_process_options' => sub {
     my ($orig, $self, $name, $options, @rest) = @_;
@@ -23,7 +23,7 @@ around '_process_options' => sub {
 =attr isa_map
 
 Specifies the prefix:tag to class name mapping used with union xpath
-queries. See L<XML::Rabbit> for more detailed information.
+queries. See L<JSON::Rabbit> for more detailed information.
 
 =cut
 
@@ -70,7 +70,7 @@ sub _build_default {
     };
 }
 
-Moose::Util::meta_attribute_alias('XPathObjectMap');
+Moose::Util::meta_attribute_alias('JPathObjectMap');
 
 no Moose::Role;
 
@@ -78,13 +78,13 @@ no Moose::Role;
 
 =head1 SYNOPSIS
 
-    package MyXMLSyntaxNode;
+    package MyJSONSyntaxNode;
     use Moose;
-    with 'XML::Rabbit::Node';
+    with 'JSON::Rabbit::Node';
 
     has 'persons' => (
-        isa         => 'HashRef[MyXMLSyntax::Person]',
-        traits      => [qw(XPathObjectMap)],
+        isa         => 'HashRef[MyJSONSyntax::Person]',
+        traits      => [qw(JPathObjectMap)],
         xpath_query => './persons/*',
         xpath_key   => './@name',
     );
@@ -97,9 +97,9 @@ no Moose::Role;
 =head1 DESCRIPTION
 
 This module provides the extraction of multiple complex values (subtrees)
-from an XML node based on an XPath query. Each subtree is used as input for
+from an JSON node based on an JPath query. Each subtree is used as input for
 the constructor of the class specified in the isa attribute. All of the
 extracted objects are then put into an arrayref which is accessible via the
 parent attribute.
 
-See L<XML::Rabbit> for a more complete example.
+See L<JSON::Rabbit> for a more complete example.
