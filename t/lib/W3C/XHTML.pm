@@ -3,44 +3,38 @@ use warnings;
 
 package W3C::XHTML;
 use Moose;
-with 'XML::Rabbit::RootNode';
-
-has '+namespace_map' => (
-    default => sub { {
-        "xhtml" => "http://www.w3.org/1999/xhtml",
-    } },
-);
+with 'JSON::Rabbit::RootNode';
 
 has 'title' => (
     isa         => 'Str',
-    traits      => [qw(XPathValue)],
-    xpath_query => '/xhtml:html/xhtml:head/xhtml:title',
+    traits      => [qw(JPathValue)],
+    jpath_query => '$.html.head.title',
 );
 
 has 'style' => (
     isa         => 'Maybe[W3C::XHTML::Style]',
-    traits      => [qw(XPathObject)],
-    xpath_query => '/xhtml:html/xhtml:head/xhtml:style',
+    traits      => [qw(JPathObject)],
+    jpath_query => '$.html.head.style',
 );
 
 has 'body' => (
     isa         => 'W3C::XHTML::Body',
-    traits      => [qw(XPathObject)],
-    xpath_query => '/xhtml:html/xhtml:body',
+    traits      => [qw(JPathObject)],
+    jpath_query => '$.html.body',
 );
 
 has 'all_sources' => (
     isa         => 'ArrayRef[Str]',
-    traits      => [qw(XPathValueList)],
-    xpath_query => '//@src',
+    traits      => [qw(JPathValueList)],
+    jpath_query => '$..src',
 );
 
 has 'body_and_all_images' => (
-    traits      => ['XPathObjectList'],
-    xpath_query => '//xhtml:body|//xhtml:img',
+    traits      => ['JPathObjectList'],
+    jpath_query => '$.body|$.img',
     isa_map     => {
-        'xhtml:body' => 'W3C::XHTML::Body',
-        'xhtml:img'  => 'W3C::XHTML::Image',
+        'body' => 'W3C::XHTML::Body',
+        'img'  => 'W3C::XHTML::Image',
     },
 );
 

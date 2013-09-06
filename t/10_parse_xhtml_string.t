@@ -17,8 +17,6 @@ close($fh);
 
 my $xhtml = W3C::XHTML->new( xml => $xml );
 isa_ok( $xhtml, 'W3C::XHTML' );
-can_ok( $xhtml, 'xpc' ); # XPathContext should be available
-isa_ok( $xhtml->xpc, 'XML::LibXML::XPathContext');
 
 can_ok( $xhtml, 'title');
 is($xhtml->title, 'Hei på deg', 'Main title mismatch' );

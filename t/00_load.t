@@ -1,17 +1,15 @@
-#!perl -T
+#!perl
 
 use Test::More tests => 9;
 
-BEGIN {
-    require_ok( 'XML::Rabbit' );
-    require_ok( 'XML::Rabbit::Sugar' );
-    require_ok( 'XML::Rabbit::Root' );
-    require_ok( 'XML::Rabbit::RootNode' );
-    require_ok( 'XML::Rabbit::Node' );
-    require_ok( 'XML::Rabbit::Trait::XPathValue' );
-    require_ok( 'XML::Rabbit::Trait::XPathValueList' );
-    require_ok( 'XML::Rabbit::Trait::XPathObject' );
-    require_ok( 'XML::Rabbit::Trait::XPathObjectList' );
-}
+require_ok( 'JSON::Rabbit' );
+require_ok( 'JSON::Rabbit::Sugar' );
+require_ok( 'JSON::Rabbit::Root' );
+require_ok( 'JSON::Rabbit::RootNode' );
+require_ok( 'JSON::Rabbit::Node' );
+require_ok( 'JSON::Rabbit::Trait::JPathValue' );
+require_ok( 'JSON::Rabbit::Trait::JPathValueList' );
+require_ok( 'JSON::Rabbit::Trait::JPathObject' );
+require_ok( 'JSON::Rabbit::Trait::JPathObjectList' );
 
-diag( "Testing XML::Rabbit $XML::Rabbit::VERSION, Perl $], $^X" );
+diag( "Testing JSON::Rabbit $XML::Rabbit::VERSION, Perl $], $^X" );
